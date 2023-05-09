@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.UserManagementSystemController">
+   <children>
+<!--       追加-->
+      <TextField fx:id="userName" layoutX="111.0" layoutY="124.0" />
+      <Label layoutX="60.0" layoutY="128.0" prefHeight="18.0" prefWidth="47.0" text="名前" />
+      <TextField fx:id="score" layoutX="111.0" layoutY="174.0" />
+      <Label layoutX="60.0" layoutY="177.0" prefHeight="18.0" prefWidth="47.0" text="スコア" />
+      <Button layoutX="165.0" layoutY="208.0" mnemonicParsing="false" onAction="#userAddButton" text="追加" />
+      <ComboBox fx:id="affiliatedCompany" layoutX="112.0" layoutY="80.0" prefWidth="150.0" />
+
+
+<!--       編集Aria-->
+      <TextField fx:id="userNameEdit" layoutX="380.0" layoutY="124.0" />
+      <TextField fx:id="scoreEdit" layoutX="380.0" layoutY="175.0" />
+<!--       onAction="#"-->
+      <Button fx:id="updateButtonEdit" layoutX="385.0" layoutY="218.0" mnemonicParsing="false" onAction="#updateButton" text="更新" />
+      <Button fx:id="deleteButtonEdit" layoutX="330.0" layoutY="218.0" mnemonicParsing="false" onAction="#deleteButton" text="削除" />
+
+<!--       一覧-->
+       <TableView fx:id="userManagementSystemTable" layoutX="120.0" layoutY="250.0" prefHeight="130.0" prefWidth="300.0">
+           <columns>
+               <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+               <TableColumn fx:id="affiliatedCompanyColumn" prefWidth="75.0" text="所属企業" />
+               <TableColumn fx:id="nameColumn" prefWidth="75.0" text="名前" />
+               <TableColumn fx:id="scoreColumn" prefWidth="75.0" text="スコア" />
+           </columns>
+       </TableView>
+      <ComboBox fx:id="affiliatedCompanyEdit" layoutX="380.0" layoutY="80.0" prefWidth="150.0" />
+      <Label layoutX="225.0" layoutY="25.0" text="ユーザー管理システム">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="150.0" layoutY="55.0" text="ユーザー追加" />
+      <Label layoutX="430.0" layoutY="55.0" text="ユーザー編集" />
+      <Label layoutX="55.0" layoutY="83.0" text="所属企業" />
+      <Label layoutX="320.0" layoutY="84.0" text="所属企業" />
+      <Label layoutX="322.0" layoutY="125.0" prefHeight="18.0" prefWidth="47.0" text="名前" />
+      <Label layoutX="320.0" layoutY="178.0" prefHeight="18.0" prefWidth="47.0" text="スコア" />
+   </children>
+</AnchorPane>
