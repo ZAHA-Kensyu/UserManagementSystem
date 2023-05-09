@@ -42,10 +42,30 @@ public class UserManagementSystemController {
     @FXML
     TableColumn<UserInformation,Integer> scoreColumn;
 
+    @FXML
+    Label inputError;
+
+    @FXML
+    Label rangeError;
+
+    @FXML
+    Label inputError1;
+
+    @FXML
+    Label editInputError;
+
+    @FXML
+    Label editRangeError;
+
+    @FXML
+    Label editInputError1;
+
     //社員を管理する リストを作成
     ObservableList<UserInformation> userInformationObservableList = FXCollections.observableArrayList();
     int id;
     public void initialize(){
+        errorShow();
+
         //コンボボックス
         affiliatedCompany.getItems().addAll("A会社","B会社","C会社","D会社");
         affiliatedCompanyEdit.getItems().addAll("A会社","B会社","C会社","D会社");
@@ -82,12 +102,58 @@ public class UserManagementSystemController {
 
     }
 
+    void errorShow(){
+        inputError.setOpacity(0);
+        rangeError.setOpacity(0);
+        inputError1.setOpacity(0);
+        editInputError.setOpacity(0);
+        editRangeError.setOpacity(0);
+        editInputError1.setOpacity(0);
+    }
+
     @FXML
     void updateButton(){
+        errorShow();
         if(!userManagementSystemTable.getSelectionModel().isEmpty()) {
-            System.out.println("選択されている");
-            userInformationObservableList.set(userManagementSystemTable.getSelectionModel().getSelectedIndex(), new UserInformation(3, affiliatedCompanyEdit.getValue().toString(), userNameEdit.getText(), RangController(Integer.parseInt(scoreEdit.getText()))));
-            userManagementSystemTable.setItems(userInformationObservableList);
+            //空白が入力されたら
+            boolean addFlg = true;
+            String name = userNameEdit.getText();
+            String aff = affiliatedCompanyEdit.getValue().toString();
+            String scoreText = scoreEdit.getText();
+            int score = 0;
+            if(!isCheck(scoreText)){
+                System.out.println("数値ではないエラー出力");
+                editInputError1.setOpacity(1);
+                addFlg = false;
+            }else{
+                if(scoreText == "" || scoreText==" "){
+                    System.out.println("数値入力空白エラー");
+                    editInputError1.setOpacity(1);
+                    addFlg = false;
+                }else{
+                    score = Integer.parseInt(scoreText);
+                    if(!rangCheck(score)){
+                        System.out.println("入力が範囲外です");
+                        editRangeError.setOpacity(1);
+                        addFlg = false;
+                    }
+                }
+
+            }
+
+            if(name == "" || name == " "){
+                //エラー処理
+                System.out.println("名前欄が空白なのでエラー");
+                editInputError.setOpacity(1);
+                addFlg = false;
+            }
+
+            if(addFlg) {
+                System.out.println("選択されている");
+                userInformationObservableList.set(userManagementSystemTable.getSelectionModel().getSelectedIndex(), new UserInformation(1, aff, name, score));
+                userManagementSystemTable.setItems(userInformationObservableList);
+            }
+
         }else{
             System.out.println("選択されていない");
         }
@@ -105,16 +171,67 @@ public class UserManagementSystemController {
 
     @FXML
     void userAddButton(){
-        id = userInformationObservableList.size() + 1;
-        userInformationObservableList.add(new UserInformation(id,affiliatedCompany.getValue().toString(),userName.getText(),RangController(Integer.parseInt(score.getText()))));
-        userManagementSystemTable.setItems(userInformationObservableList);
-    }
+        errorShow();
+            //空白が入力されたら
+        boolean addFlg = true;
+        String name = userName.getText();
+        String aff = affiliatedCompany.getValue().toString();
+        String scoreText = score.getText();
+        int score = 0;
+        if(!isCheck(scoreText)){
+            System.out.println("数値ではないエラー出力");
+            inputError1.setOpacity(1);
+            addFlg = false;
+        }else{
+            if(scoreText == "" || scoreText==" "){
+                System.out.println("数値入力空白エラー");
+                inputError1.setOpacity(1);
+                addFlg = false;
+            }else{
+                score = Integer.parseInt(scoreText);
+                if(!rangCheck(score)){
+                    System.out.println("入力が範囲外です");
+                    rangeError.setOpacity(1);
+                    addFlg = false;
+                }
+            }
 
-    int RangController(int num){
-        if(num > 100 || num < 0){
-            num = 0;
         }
 
-        return num;
+        if(name == "" || name == " "){
+                //エラー処理
+            System.out.println("名前欄が空白なのでエラー");
+            inputError.setOpacity(1);
+            addFlg = false;
+        }
+
+        if(addFlg){
+            id = userInformationObservableList.size() + 1;
+            userInformationObservableList.add(new UserInformation(id, aff, name, score));
+            userManagementSystemTable.setItems(userInformationObservableList);
+        }
+    }
+
+    boolean isCheck(String str){
+        boolean isNumber = true;
+
+        for(var i = 0; i < str.length(); i++){
+            if(!Character.isDigit(str.charAt(i))){
+                isNumber = false;
+                break;
+            }
+        }
+
+        return isNumber;
+    }
+
+    boolean rangCheck(int num){
+        boolean isRange= true;
+
+        if(num > 100 || num < 0){
+            isRange = false;
+        }
+
+        return isRange;
     }
 }

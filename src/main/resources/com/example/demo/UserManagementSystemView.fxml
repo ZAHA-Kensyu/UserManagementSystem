@@ -11,7 +11,7 @@
       <Label layoutX="60.0" layoutY="128.0" prefHeight="18.0" prefWidth="47.0" text="名前" />
       <TextField fx:id="score" layoutX="111.0" layoutY="174.0" />
       <Label layoutX="60.0" layoutY="177.0" prefHeight="18.0" prefWidth="47.0" text="スコア" />
-      <Button layoutX="165.0" layoutY="208.0" mnemonicParsing="false" onAction="#userAddButton" text="追加" />
+      <Button layoutX="165.0" layoutY="220.0" mnemonicParsing="false" onAction="#userAddButton" text="追加" />
       <ComboBox fx:id="affiliatedCompany" layoutX="112.0" layoutY="80.0" prefWidth="150.0" />
 
 
@@ -43,5 +43,16 @@
       <Label layoutX="320.0" layoutY="84.0" text="所属企業" />
       <Label layoutX="322.0" layoutY="125.0" prefHeight="18.0" prefWidth="47.0" text="名前" />
       <Label layoutX="320.0" layoutY="178.0" prefHeight="18.0" prefWidth="47.0" text="スコア" />
+
+
+      <Label fx:id="inputError" layoutX="170.0" layoutY="150.0" text="入力エラー" textFill="RED" />
+
+       <Label fx:id="rangeError" layoutX="130.0" layoutY="200.0" text="数値範囲力エラー 0~100" textFill="RED" />
+       <Label fx:id="inputError1" layoutX="180.0" layoutY="200.0" text="入力エラー" textFill="RED" />
+
+       <Label fx:id="editInputError" layoutX="430.0" layoutY="155.0" text="入力エラー" textFill="RED" />
+
+       <Label fx:id="editRangeError" layoutX="400.0" layoutY="200.0" text="数値範囲力エラー 0~100" textFill="RED" />
+       <Label fx:id="editInputError1" layoutX="430.0" layoutY="200.0" text="入力エラー" textFill="RED" />
    </children>
 </AnchorPane>
